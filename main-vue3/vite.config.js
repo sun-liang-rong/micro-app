@@ -10,6 +10,14 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://hrotest.huokesaas.com',
+        changeOrigin: true
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

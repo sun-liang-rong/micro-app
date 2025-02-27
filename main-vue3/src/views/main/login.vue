@@ -20,13 +20,14 @@
 </template>
 
 <script>
+import { login } from '@/api/login'
 export default {
   name: 'Login',
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 13277081267,
+        password: 'a123456'
       },
       rules: {
         username: [
@@ -42,11 +43,15 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          if (this.loginForm.username === 'admin' && this.loginForm.password === '123456') {
-            this.$message.success('登录成功');
-          } else {
-            this.$message.error('用户名或密码错误');
-          }
+          login(this.loginForm).then(
+            res => {
+              console.log(res)
+            }
+          ).catch(
+            error => {
+              console.log(error, 'error')
+            }
+          )
         } else {
           return false;
         }
